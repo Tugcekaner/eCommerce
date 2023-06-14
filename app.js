@@ -288,6 +288,7 @@ const urunDetay = () => {
 //     }
 // }
 
+// ! sepet aynı üründen ekleyebilme test1
 const sepeteEkle = () => {
     let sepeteEkle = document.querySelectorAll(".urunlerRow .sepeteEkle");
     for (const i of sepeteEkle) {
