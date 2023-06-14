@@ -256,6 +256,38 @@ const urunDetay = () => {
     }
 };
 
+// const sepeteEkle = () => {
+//     let sepeteEkle = document.querySelectorAll(".urunlerRow .sepeteEkle");
+//     for (const i of sepeteEkle) {
+//         i.addEventListener("click", function (evet) {
+//             let element = evet.target;
+//             let card = element.closest(".shopCard");
+//             let cardParentNode = card.parentNode;
+
+//             let img = cardParentNode.querySelector(".cardImg").src;
+//             let title = cardParentNode.querySelector(".cardTitle").innerHTML;
+//             let price = Number(cardParentNode.querySelector(".price").innerHTML);
+
+//             const eskiUrun = sepet.find((urun) => urun.title === title);
+            // if (eskiUrun) {
+            //     // console.log(eskiUrun);
+            //     return
+            // }
+
+            // let eklenenSepet = {
+            //     img: img,
+            //     title: title,
+            //     price: price,
+            // };
+            
+//             sepet.push(eklenenSepet);
+            // console.log(sepet);
+//             document.querySelector(".badge").innerHTML=`${sepet.length}`
+//             sepetGuncelle();
+//         });
+//     }
+// }
+
 const sepeteEkle = () => {
     let sepeteEkle = document.querySelectorAll(".urunlerRow .sepeteEkle");
     for (const i of sepeteEkle) {
@@ -268,24 +300,26 @@ const sepeteEkle = () => {
             let title = cardParentNode.querySelector(".cardTitle").innerHTML;
             let price = Number(cardParentNode.querySelector(".price").innerHTML);
 
-            const eskiUrun = sepet.find((urun) => urun.title === title);
-            if (eskiUrun) {
-                // console.log(eskiUrun);
-                return
+            const eskiUrunIndex = sepet.findIndex((urun) => urun.title === title);
+            if (eskiUrunIndex !== -1) {
+                //* Ürün zaten sepete eklenmiş, sayısını arttır
+                sepet[eskiUrunIndex].quantity++;
+            } 
+            else {
+                let eklenenSepet = {
+                    img: img,
+                    title: title,
+                    price: price,
+                    quantity: 1, //* İlk defa eklenen ürünün sayısı 1
+                };
+                sepet.push(eklenenSepet);
             }
-
-            let eklenenSepet = {
-                img: img,
-                title: title,
-                price: price,
-            };
-            sepet.push(eklenenSepet);
-            // console.log(sepet);
-            document.querySelector(".badge").innerHTML=`${sepet.length}`
+            document.querySelector(".badge").innerHTML = `${sepet.length}`;
             sepetGuncelle();
         });
     }
-}
+};
+
 
 $(document).ready(function(){
     $('.sliderParent').slick({
